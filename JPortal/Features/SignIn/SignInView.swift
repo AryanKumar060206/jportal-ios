@@ -106,6 +106,12 @@ struct GoogleButton: View {
             if let error = model.error {
                 Text(error).font(.subheadline).foregroundStyle(JP.bad).multilineTextAlignment(.center)
             }
+            if config == .some(nil), let e = app.sessions.configError {
+                // the friendly line, then the system's own words, which are what tell a blocked network from a down portal
+                Text("\(describe(e)): \(e.localizedDescription)")
+                    .font(.footnote).foregroundStyle(.secondary).multilineTextAlignment(.center)
+                    .textSelection(.enabled)
+            }
         }
         .task(id: attempt) {
             config = nil

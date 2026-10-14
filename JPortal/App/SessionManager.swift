@@ -74,11 +74,21 @@ final class SessionManager {
 
     var isDemo: Bool { session.map(Demo.owns) ?? false }
 
+    /// why the last config load failed, so the sign-in screen can say more than "can't reach"
+    private(set) var configError: Error?
+
     func loadConfig() async -> PortalConfig? {
         if let config { return config }
-        let c = try? await auth.config()
-        if let c { config = c }
-        return c
+        do {
+            let c = try await auth.config()
+            config = c
+            configError = nil
+            return c
+        } catch {
+            configError = error
+            print("jportal: portal config failed: \(String(reflecting: error))")
+            return nil
+        }
     }
 
     func signedIn(_ s: Session) {
