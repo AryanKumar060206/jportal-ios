@@ -22,7 +22,7 @@ Unofficial. Not affiliated with or endorsed by JIIT.
 Needs Xcode 26 or newer (iOS 17+ deployment target).
 
 1. Open `JPortal.xcodeproj`.
-2. Under Signing & Capabilities, pick your team and change the bundle id (`app.jportal.ios`) to one you own.
+2. Under Signing & Capabilities, pick your team and change the bundle id (`com.aryankumar060206.jportal`) if you fork it.
 3. Run the `JPortal` scheme.
 
 From the command line:
